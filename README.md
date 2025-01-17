@@ -1,18 +1,17 @@
-# Python UIC
+# python-mongo-uic
 
 Provides a simple, reusable way to implement optimistic concurrency control in MongoDB for Python. This package is inspired by Mongoose's update-if-current plugin, allowing you to safely update documents in a concurrent environment.
 
 ## Installation
 To install the package, execute the command:
 ```
-pip install python-uic
+pip install python-mongo-uic
 ```
 
 ## Usage
 1. Import the package:
 ```
-from python-uic import versioned
-from versioned import update_if_current, set_initial_version
+from versioned import update_if_current
 ```
 
 ```
@@ -66,21 +65,11 @@ When updating a document, ensure that the Version field matches the current vers
     )
 ```
 
-5. Handle Version Conflicts.
-
-   If the version in the database does not match the version provided in the update, the update will not be applied, and the function will return a `VersionConflictError`. This allows you to handle concurrency issues safely.
-```
-    if updated_document is None:
-        raise VersionConflictError("Version conflict occurred")
-```
 
 ## API Reference
 `update_if_current(collection, filter_dict, update_dict, version)`
 
 Attempts to update a document if the current version matches the provided version. If successful, it increments the version field atomically.
-
-`VersionConflictError`
-An error returned when the version in the database does not match the expected version, indicating that the document has been modified by another process.
 
 ## Contributing
 Contributions are welcome! Please submit a pull request or open an issue to discuss changes.
