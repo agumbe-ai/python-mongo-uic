@@ -1,9 +1,9 @@
-from setuptools import setup, find_packages
+from setuptools import setup
 
 setup(
     name="update_if_current",
     version="0.1.0",
-    description="A description of your package",
+    description="An update_if_current plugin for updating database entries",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/agumbe-ai/python-mongo-uic.git",
