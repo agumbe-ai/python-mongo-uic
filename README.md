@@ -5,7 +5,7 @@ Provides a simple, reusable way to implement optimistic concurrency control in M
 ## Installation
 To install the package, execute the command:
 ```
-pip install python-mongo-uic
+pip install git+https://github.com/agumbe-ai/python-mongo-uic.git
 ```
 
 ## Usage
@@ -14,17 +14,7 @@ pip install python-mongo-uic
 from versioned import update_if_current
 ```
 
-```
-# Define python struct eg product
-# Explain how this is supposed to be used
-# When creating a new product and updating a product 
-# If version number matches
-    # Update
-# Else
-    # Handle version conflict
-```
-
-2. Define your Document Struct. 
+2. Define your Document Structure. 
    
    The MongoDB document should include a `version` field to manage versioning:
 ```
@@ -67,9 +57,25 @@ When updating a document, ensure that the Version field matches the current vers
 
 
 ## API Reference
-`update_if_current(collection, filter_dict, update_dict, version)`
+### Class: `VersionConflictError`
+* Custom exception class which mimics Go's version conflict error
 
-Attempts to update a document if the current version matches the provided version. If successful, it increments the version field atomically.
+* Description: This class is used to raise an exception when the version provided in the request does not match the current version of the document.
+
+* Inheritance: Inherits from the built-in Exception class.
+
+
+### Function: `update_if_current(collection, filter_dict, update_dict, version)`
+Looks for a document where the current version matches the provided version. If found, the `version` field is incremented atomically. 
+
+* Parameters:
+    * `collection`: The MongoDB collection.
+    * `filter_dict`: The filter to find the document (must contain _id or similar key).  
+    * `update_dict`: The update operation (without version increment).
+    * `version`: The expected current version of the document.
+
+* Returns: 
+    The updated document, or raises a `VersionConflictError` if the version doesn't match.
 
 ## Contributing
 Contributions are welcome! Please submit a pull request or open an issue to discuss changes.
