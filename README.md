@@ -11,7 +11,7 @@ pip install git+https://github.com/agumbe-ai/python-mongo-uic.git
 ## Usage
 1. Import the package:
 ```
-from versioned import update_if_current
+from versioned import update_if_current, VersionConflictError
 ```
 
 2. Define your Document Structure. 
